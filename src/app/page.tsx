@@ -1,5 +1,5 @@
-"use client"
-import { Text } from "@mantine/core";
+"use client";
+import { Box, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 type Contact = {
@@ -19,9 +19,10 @@ export default function Home() {
 
     fetchContacts();
   }, []);
+
   return (
     <div>
-{contacts.length === 0 ? (
+      {contacts.length === 0 ? (
         <p>No contacts received yet.</p>
       ) : (
         <ul className="space-y-4">
@@ -30,6 +31,18 @@ export default function Home() {
               <p className="text-lg font-medium">
                 {contact.first_name} {contact.last_name}
               </p>
+              <Box>
+                {Object.entries(contact).map(([key, value]) => (
+                  <div key={key}>
+                    <strong>{key}:</strong>{" "}
+                    <span>
+                      {typeof value === "object" && value !== null
+                        ? JSON.stringify(value)
+                        : String(value)}
+                    </span>
+                  </div>
+                ))}
+              </Box>
             </li>
           ))}
         </ul>

@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
-type WebhookContact = {
+type CRMContact = {
   first_name: string;
   last_name: string;
   [key: string]: any;
 };
 
-let contacts: WebhookContact[] = [];
+let contacts: CRMContact[] = [];
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    const body: WebhookContact = await req.json();
+    const body: CRMContact = await req.json();
 
     if (!body.first_name || !body.last_name) {
       return NextResponse.json(
